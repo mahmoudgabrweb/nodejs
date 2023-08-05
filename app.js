@@ -1,7 +1,15 @@
-const http = require("http");
+const express = require("express");
 
-const server = http.createServer((req, res) => {
-    console.log(req);
+const app = express();
+
+app.use((req, res, next) => {
+    console.log("Inside middleware");
+    next();
 });
 
-server.listen(3000);
+app.use("/", (req, res, next) => {
+    console.log("Main page");
+    next();
+});
+
+app.listen(3000);
